@@ -12,7 +12,7 @@ pipeline {
                 // nodejs(nodeJSInstallationName: 'node10') {
                 //     sh 'npm install'
                 // }
-                sh 'sudo chown -R 115:124 "/.npm"'
+                sh 'chown -R 115:124 "/.npm"'
                 sh 'npm install'
             }
         }
