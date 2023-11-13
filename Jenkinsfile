@@ -14,15 +14,13 @@ pipeline {
                 sh 'cat Jenkinsfile'
             }
         }
-        // stage('Build') {
-        //     steps {
-        //         nodejs(nodeJSInstallationName: 'node10') {
-        //             sh 'npm cache clean --force'
-        //             sh 'npm init -y'
-        //             sh 'npm install' 
-        //         }
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                nodejs(nodeJSInstallationName: 'node10') {
+                    sh 'npm ls react'
+                }
+            }
+        }
         stage('Test') {
             steps {
                 sh './jenkins/scripts/test.sh'
