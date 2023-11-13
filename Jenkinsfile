@@ -12,6 +12,7 @@ pipeline {
             steps {
                 sh 'cat Jenkinsfile'
             }
+        }
 
         stage('Build') {
             steps {
