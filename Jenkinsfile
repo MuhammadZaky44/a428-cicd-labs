@@ -1,31 +1,23 @@
 pipeline {
     agent {
         docker {
-            image 'node:16-buster-slim'
+            image 'node:18-alpine'
             args '-p 4000:4000'
         }
     }
-    
-    tools {nodejs 'node10'}
 
     stages {
-        stage('Cat') {
+        stage('Build') {
             steps {
-                sh 'cat Jenkinsfile'
+                // nodejs(nodeJSInstallationName: 'node10') {
+                //     sh 'npm install'
+                // }
+                sh 'npm install'
             }
         }
-        // stage('Build') {
-        //     steps {
-        //         nodejs(nodeJSInstallationName: 'node10') {
-        //             sh 'npm ls react'
-        //         }
-        //     }
-        // }
         stage('Test') {
             steps {
-                nodejs(nodeJSInstallationName: 'node10') {
-                    sh './jenkins/scripts/test.sh'
-               }
+               sh './jenkins/scripts/test.sh'
             }
         }
 
