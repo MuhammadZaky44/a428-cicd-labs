@@ -9,11 +9,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // nodejs(nodeJSInstallationName: 'node10') {
-                //     sh 'npm install'
-                // }
-                sh 'apt install npm'
-                sh 'npm install'
+                nodejs(nodeJSInstallationName: 'node18') {
+                    sh 'npm install'
+                }
             }
         }
         stage('Test') {
