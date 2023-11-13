@@ -12,7 +12,7 @@ pipeline {
                 // nodejs(nodeJSInstallationName: 'node10') {
                 //     sh 'npm install'
                 // }
-                sh 'chown -R 115:124 "/.npm"'
+                sh 'apt install npm'
                 sh 'npm install'
             }
         }
