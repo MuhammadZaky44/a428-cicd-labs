@@ -7,6 +7,12 @@ pipeline {
     }
 
     stages {
+
+        stage('Cat') {
+            steps {
+                sh 'cat Jenkinsfile'
+            }
+
         stage('Build') {
             steps {
                 nodejs(nodeJSInstallationName: 'node10') {
