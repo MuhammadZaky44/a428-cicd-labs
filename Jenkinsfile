@@ -5,15 +5,15 @@ pipeline {
             args '-p 4000:4000'
         }
     }
+    
+    tools {nodejs 'node10'}
 
     stages {
-
         stage('Cat') {
             steps {
                 sh 'cat Jenkinsfile'
             }
         }
-
         stage('Build') {
             steps {
                 nodejs(nodeJSInstallationName: 'node10') {
@@ -21,7 +21,6 @@ pipeline {
                 }
             }
         }
-
         stage('Test') {
             steps {
                 sh './jenkins/scripts/test.sh'
@@ -33,7 +32,6 @@ pipeline {
         //         input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)' 
         //     }
         // }
-
         stage('Deploy') { 
             steps {
                 sh './jenkins/scripts/deliver.sh' 
