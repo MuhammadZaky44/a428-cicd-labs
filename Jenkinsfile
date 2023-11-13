@@ -23,7 +23,9 @@ pipeline {
         // }
         stage('Test') {
             steps {
-                sh './jenkins/scripts/test.sh'
+                nodejs(nodeJSInstallationName: 'node10') {
+                    sh './jenkins/scripts/test.sh'
+               }
             }
         }
 
@@ -34,10 +36,12 @@ pipeline {
         // }
         stage('Deploy') { 
             steps {
-                sh './jenkins/scripts/deliver.sh' 
-                // sleep(time: 1, unit: 'MINUTES')
-                input message: 'Done using the React App?'
-                sh './jenkins/scripts/kill.sh' 
+                nodejs(nodeJSInstallationName: 'node10') {
+                    sh './jenkins/scripts/deliver.sh' 
+                    // sleep(time: 1, unit: 'MINUTES')
+                    input message: 'Done using the React App?'
+                    sh './jenkins/scripts/kill.sh'
+               }
             }
         }
     }
