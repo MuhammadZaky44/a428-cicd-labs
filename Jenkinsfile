@@ -17,6 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 nodejs(nodeJSInstallationName: 'node10') {
+                    sh 'npm cache clean --force'
                     sh 'npm init -y'
                     sh 'npm install' 
                 }
