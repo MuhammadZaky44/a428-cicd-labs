@@ -5,6 +5,9 @@ pipeline {
             args '-p 4000:4000'
         }
     }
+
+    tools {nodejs "nodejs"}
+
     stages {
         stage('Build') {
             steps {
