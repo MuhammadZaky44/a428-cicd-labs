@@ -6,12 +6,12 @@ pipeline {
         }
     }
 
-    tools {nodejs "nodejs"}
-
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                nodejs(nodeJSInstallationName: 'node10') {
+                    sh 'npm install' 
+                }
             }
         }
 
