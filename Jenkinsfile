@@ -1,22 +1,20 @@
 pipeline {
     agent {
         docker {
-            image 'node:18-alpine'
-            args '-p 4000:4000'
+            image 'node:16-buster-slim'
+            args '-p 3000:3000'
         }
     }
-
     stages {
         stage('Build') {
             steps {
-                nodejs(nodeJSInstallationName: 'node18') {
-                    sh 'npm install'
-                }
+                sh 'npm install'
             }
         }
+
         stage('Test') {
             steps {
-               sh './jenkins/scripts/test.sh'
+                sh './jenkins/scripts/test.sh'
             }
         }
 
@@ -25,14 +23,13 @@ pipeline {
         //         input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)' 
         //     }
         // }
+
         stage('Deploy') { 
             steps {
-                nodejs(nodeJSInstallationName: 'node10') {
-                    sh './jenkins/scripts/deliver.sh' 
-                    // sleep(time: 1, unit: 'MINUTES')
-                    input message: 'Done using the React App?'
-                    sh './jenkins/scripts/kill.sh'
-               }
+                sh './jenkins/scripts/deliver.sh' 
+                // sleep(time: 1, unit: 'MINUTES')
+                input message: 'Done using the React App?'
+                sh './jenkins/scripts/kill.sh' 
             }
         }
     }
